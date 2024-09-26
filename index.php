@@ -11,7 +11,7 @@ use Symfony\Component\Routing\RouteCollection;
  *
  * @see https://code.tutsplus.com/set-up-routing-in-php-applications-using-the-symfony-routing-component--cms-31231t
  */
-$routes = include __DIR__ . '/configs/Routes.php';
+$routes = include __DIR__ . '/routes/Routes.php';
 
 $context = new RequestContext();
 $context->fromRequest(Request::createFromGlobals());

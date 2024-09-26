@@ -1,4 +1,4 @@
 vendor/
 vendor/*
-params.php
+src/configs/params.php
 

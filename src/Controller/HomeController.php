@@ -14,4 +14,8 @@ class HomeController {
   public function index() {
     return new Response('Bonjour, Symfony!');
   }
+  
+  public function members() {
+    return new Response('Liste des membres');
+  }
 }

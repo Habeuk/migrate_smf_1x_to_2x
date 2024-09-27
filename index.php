@@ -38,7 +38,8 @@ catch (ResourceNotFoundException $e) {
   $response = new Response('Page not found', 404);
 }
 catch (Exception $e) {
-  $response = new Response('An error occurred', 500);
+  $response = new Response($e->getMessage(), 500);
+  dump($e->getTrace());
 }
 
 $response->send();

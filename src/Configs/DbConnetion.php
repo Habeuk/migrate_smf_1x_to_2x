@@ -7,7 +7,9 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
 
 /**
+ * Document importat à lire.
  *
+ * @see https://www.doctrine-project.org/projects/doctrine-orm/en/3.2/reference/advanced-configuration.html
  * @author stephane
  *        
  */
@@ -28,6 +30,7 @@ class DbConnetion {
       $config = ORMSetup::createAttributeMetadataConfiguration(paths: [
         __DIR__ . '/src/Entity'
       ], isDevMode: true);
+      
       // Configuring the database connection
       $params = Params::getParamDb();
       $connection = [
@@ -38,16 +41,15 @@ class DbConnetion {
         'password' => $params['password'],
         'dbname' => $params['dbname']
       ];
+      $orm_connect = DriverManager::getConnection($connection, $config);
       if (!empty($params['prefix_table'])) {
         $evm = new \Doctrine\Common\EventManager();
         $tablePrefix = new \Habeuk\MigrateSmf1xTo2x\DoctrineExtensions\TablePrefix($params['prefix_table']);
         $evm->addEventListener(\Doctrine\ORM\Events::loadClassMetadata, $tablePrefix);
-        $connection = DriverManager::getConnection($connection, $config, $evm);
+        self::$entityManager = new EntityManager($orm_connect, $config, $evm);
       }
       else
-        $connection = DriverManager::getConnection($connection, $config);
-      // Obtaining the entity manager
-      self::$entityManager = new EntityManager($connection, $config);
+        self::$entityManager = new EntityManager($orm_connect, $config);
     }
     return self::$entityManager;
   }

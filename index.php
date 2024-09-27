@@ -7,6 +7,10 @@ use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
+
+require_once __DIR__ . '/bootstrap.php';
+$productRepository = $entityManager->getRepository('Product');
+$products = $productRepository->findAll();
 /**
  *
  * @see https://code.tutsplus.com/set-up-routing-in-php-applications-using-the-symfony-routing-component--cms-31231t

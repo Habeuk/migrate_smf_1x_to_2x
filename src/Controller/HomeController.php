@@ -3,6 +3,7 @@
 namespace Habeuk\MigrateSmf1xTo2x\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Habeuk\MigrateSmf1xTo2x\Entity\Product;
 
 /**
  *
@@ -12,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 class HomeController {
   
   public function index() {
+    $Product = new Product();
+    $Product->getAllProducts();
     return new Response('Bonjour, Symfony!');
   }
   

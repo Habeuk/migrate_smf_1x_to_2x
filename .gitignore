@@ -1,4 +1,7 @@
 vendor/
 vendor/*
 src/Configs/Params.php
+.settings
+.project
+.buildpath
 

@@ -8,9 +8,10 @@ use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
 
-require_once __DIR__ . '/bootstrap.php';
-$productRepository = $entityManager->getRepository('Product');
-$products = $productRepository->findAll();
+// test file
+require_once __DIR__ . '/tests.php';
+
+// addProduct();
 /**
  *
  * @see https://code.tutsplus.com/set-up-routing-in-php-applications-using-the-symfony-routing-component--cms-31231t

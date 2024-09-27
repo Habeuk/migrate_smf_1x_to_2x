@@ -3,7 +3,7 @@
 namespace Habeuk\MigrateSmf1xTo2x\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
-use Habeuk\MigrateSmf1xTo2x\Entity\Product;
+use Habeuk\MigrateSmf1xTo2x\Configs\DbConnetion;
 
 /**
  *
@@ -13,12 +13,13 @@ use Habeuk\MigrateSmf1xTo2x\Entity\Product;
 class HomeController {
   
   public function index() {
-    $Product = new Product();
-    $Product->getAllProducts();
     return new Response('Bonjour, Symfony!');
   }
   
   public function members() {
+    $MembresRepository = DbConnetion::EntityManager()->getRepository(\Habeuk\MigrateSmf1xTo2x\Entity\Members::class);
+    $Membres = $MembresRepository->findAll();
+    dump($Membres);
     return new Response('Liste des membres');
   }
 }

@@ -9,7 +9,8 @@ class ParamsExample {
       'host' => '',
       'user' => '',
       'password' => '',
-      'dbname' => ''
+      'dbname' => '',
+      'prefix_table' => ''
     ];
   }
 }

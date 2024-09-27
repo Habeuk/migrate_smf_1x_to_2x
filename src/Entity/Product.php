@@ -37,9 +37,11 @@ class Product {
   
   /**
    * Recupere tous les produits.
+   *
+   * @return array
    */
   public function getAllProducts() {
     $productRepository = DbConnetion::EntityManager()->getRepository(self::class);
-    $products = $productRepository->findAll();
+    return $productRepository->findAll();
   }
 }

@@ -17,8 +17,8 @@ class HomeController {
   }
   
   public function members() {
-    $MembresRepository = DbConnetion::EntityManager()->getRepository(\Habeuk\MigrateSmf1xTo2x\Entity\Members::class);
-    $Membres = $MembresRepository->findAll();
+    $members = new \Habeuk\MigrateSmf1xTo2x\Entity\Members();
+    $members->getAllMembers();
     return new Response('Liste des membres');
   }
 }

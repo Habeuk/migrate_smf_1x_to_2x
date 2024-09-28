@@ -10,5 +10,7 @@ $routes->add('home', new Route('/', [
 $routes->add('members', new Route('/members', [
   '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\HomeController::members'
 ]));
-
+$routes->add('import_groupsmembers', new Route('/import-groups-members', [
+  '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportGroupsMembers'
+]));
 return $routes;

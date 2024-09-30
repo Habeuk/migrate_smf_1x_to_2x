@@ -19,94 +19,94 @@ class Topics {
   #[ORM\Id]
   #[ORM\Column(type: 'integer')]
   #[ORM\GeneratedValue]
-  private $ID_ATTACH;
+  private $ID_TOPIC;
   
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $ID_THUMB;
+  private string $isSticky;
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $ID_MSG;
+  private string $ID_BOARD;
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $ID_MEMBER;
+  private string $ID_FIRST_MSG;
   /**
    * memberName
    */
-  #[ORM\Column(type: 'text')]
-  private string $filename;
+  #[ORM\Column(type: 'integer')]
+  private string $ID_LAST_MSG;
   
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $size;
+  private string $ID_MEMBER_STARTED;
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $downloads;
-  /**
-   * memberName
-   */
-  #[ORM\Column(type: 'string')]
-  private string $file_hash;
+  private string $ID_MEMBER_UPDATED;
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $attachmentType;
+  private string $ID_POLL;
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $width;
+  private string $numReplies;
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $height;
+  private string $numViews;
+  /**
+   */
+  #[ORM\Column(type: 'integer')]
+  private string $locked;
   
   /**
    *
    * @return string
    */
   protected function getTable() {
-    return 'attachments';
+    return 'topics';
   }
   
   protected function getColumnId() {
-    return 'ID_ATTACH';
+    return 'ID_TOPIC';
   }
   
   protected function getColumnIdInfo() {
     return [
-      'smf_1' => 'ID_ATTACH',
-      'smf_2' => 'id_attach'
+      'smf_1' => 'ID_TOPIC',
+      'smf_2' => 'id_topic'
     ];
   }
   
-  protected function buildRow(Attachments $row) {
+  protected function buildRow(Topics $row) {
     return [
-      'id_attach' => $row->ID_ATTACH,
-      'id_thumb' => $row->ID_THUMB,
-      'id_msg' => $row->ID_MSG,
-      'id_member' => $row->ID_MEMBER,
-      'id_folder' => 0,
-      'attachment_type' => $row->attachmentType,
-      'filename' => $row->filename,
-      'size' => $row->size,
-      'downloads' => $row->downloads,
-      'file_hash' => $row->file_hash,
-      'width' => $row->width,
-      'height' => $row->height,
-      'mime_type' => '',
+      'id_topic' => $row->ID_TOPIC,
+      'is_sticky' => $row->isSticky,
+      'id_board' => $row->ID_BOARD,
+      'id_first_msg' => $row->ID_FIRST_MSG,
+      'id_last_msg' => $row->ID_LAST_MSG,
+      'id_member_started' => $row->ID_MEMBER_STARTED,
+      'id_member_updated' => $row->ID_MEMBER_UPDATED,
+      'id_poll' => $row->ID_POLL,
+      'num_replies' => $row->numReplies,
+      'num_views' => $row->numViews,
+      'locked' => $row->locked,
+      'redirect_expires' => 0,
+      'id_redirect_topic' => 0,
+      'unapproved_posts' => 0,
       'approved' => 1
     ];
   }

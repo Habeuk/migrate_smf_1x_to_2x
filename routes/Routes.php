@@ -28,4 +28,10 @@ $routes->add('import_members', new Route('/import-categories', [
 $routes->add('import_members', new Route('/import-polls', [
   '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportPolls'
 ]));
+$routes->add('import_members', new Route('/import-boards', [
+  '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportPoards'
+]));
+$routes->add('import_members', new Route('/import-topics', [
+  '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportTopics'
+]));
 return $routes;

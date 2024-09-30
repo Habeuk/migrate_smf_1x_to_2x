@@ -8,6 +8,8 @@ use Habeuk\MigrateSmf1xTo2x\Entity\Members;
 use Habeuk\MigrateSmf1xTo2x\Entity\Attachments;
 use Habeuk\MigrateSmf1xTo2x\Entity\Categories;
 use Habeuk\MigrateSmf1xTo2x\Entity\Polls;
+use Habeuk\MigrateSmf1xTo2x\Entity\Boards;
+use Habeuk\MigrateSmf1xTo2x\Entity\Topics;
 
 /**
  *
@@ -31,6 +33,20 @@ class ImportDatasController {
     $Polls->saveResultInVersion2x();
     dump($Polls->getresults());
     return new Response("Importe des Polls ");
+  }
+  
+  public function ImportTopics() {
+    $entity = new Topics();
+    $entity->saveResultInVersion2x();
+    dump($entity->getresults());
+    return new Response("Importe des Topics ");
+  }
+  
+  public function ImportPoards() {
+    $Boards = new Boards();
+    $Boards->saveResultInVersion2x();
+    dump($Boards->getresults());
+    return new Response("Importe des Boards ");
   }
   
   /**

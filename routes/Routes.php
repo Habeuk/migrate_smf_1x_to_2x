@@ -19,4 +19,13 @@ $routes->add('import_groupsmembers', new Route('/import-groups-members', [
 $routes->add('import_members', new Route('/import-members', [
   '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportMembers'
 ]));
+$routes->add('import_members', new Route('/import-attachments', [
+  '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportAttachments'
+]));
+$routes->add('import_members', new Route('/import-categories', [
+  '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportCategories'
+]));
+$routes->add('import_members', new Route('/import-polls', [
+  '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportPolls'
+]));
 return $routes;

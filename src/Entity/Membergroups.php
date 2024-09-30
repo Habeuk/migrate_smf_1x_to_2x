@@ -55,6 +55,10 @@ class Membergroups {
     return 'membergroups';
   }
   
+  protected function getColumnId() {
+    return 'ID_GROUP';
+  }
+  
   protected function getColumnIdInfo() {
     return [
       'smf_1' => 'ID_GROUP',

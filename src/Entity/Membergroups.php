@@ -3,8 +3,7 @@
 namespace Habeuk\MigrateSmf1xTo2x\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Habeuk\MigrateSmf1xTo2x\Configs\DbConnetion;
-use Habeuk\MigrateSmf1xTo2x\Configs\DbConnetion2;
+use Habeuk\MigrateSmf1xTo2x\Configs\DbConnection;
 
 /**
  * Entité permettant de gerer les membres.
@@ -52,7 +51,7 @@ class Membergroups {
    * @return array
    */
   public function getAllMembersGroups() {
-    $EntityManager = DbConnetion::EntityManager();
+    $EntityManager = DbConnection::EntityManager();
     $QB = $EntityManager->createQueryBuilder();
     $QB->select('m')->from(self::class, "m");
     $QB->setFirstResult(0);
@@ -65,7 +64,11 @@ class Membergroups {
    * Recupere les données de l'ancinne base de données pour la nouvelle.
    */
   public function saveResultInVersion2x() {
-    $EntityManager = DbConnetion2::EntityManager();
+    /**
+     *
+     * @var \Habeuk\MigrateSmf1xTo2x\Configs\QueryBuilderHelper $cQB
+     */
+    $cQB = DbConnection::connectionQueryBuilder('smf_v2');
     foreach ($this->getAllMembersGroups() as $Membergroups) {
       $row = [
         'id_group' => $Membergroups->ID_GROUP,
@@ -80,8 +83,24 @@ class Membergroups {
         'id_parent' => 0,
         'tfa_required' => 0
       ];
-      
-      dd($row);
+      $this->insertOrUpdate('id_group', $Membergroups->ID_GROUP, 'membergroups', $row, $cQB);
+    }
+  }
+  
+  protected function insertOrUpdate($id_column, $id_value, $table, array $values, \Habeuk\MigrateSmf1xTo2x\Configs\QueryBuilderHelper $cQB) {
+    $cQB->select($id_column);
+    $cQB->from($table, 'dd')->where("$id_column = :id")->setParameter('id', $id_value);
+    $query = $cQB->executeQuery();
+    if ($query->fetchAssociative()) {
+      $cQB->update($table);
+      $cQB->setUpdateValues($values);
+      $cQB->where("$id_column = :$id_column");
+      $cQB->executeQuery();
+    }
+    else {
+      $cQB->insert($table);
+      $cQB->setInsertValues($values);
+      $cQB->executeQuery();
     }
   }
 }

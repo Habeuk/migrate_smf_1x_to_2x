@@ -1,9 +1,9 @@
 <?php
 use Habeuk\MigrateSmf1xTo2x\Entity\Product;
-use Habeuk\MigrateSmf1xTo2x\Configs\DbConnetion;
+use Habeuk\MigrateSmf1xTo2x\Configs\DbConnection;
 
 function addProduct() {
-  $entityManager = DbConnetion::EntityManager();
+  $entityManager = DbConnection::EntityManager();
   $product = new Product();
   $product->setName("product N: " . time());
   $entityManager->persist($product);
@@ -11,7 +11,7 @@ function addProduct() {
 }
 
 function listAllProducts() {
-  $productRepository = DbConnetion::EntityManager()->getRepository(Product::class);
+  $productRepository = DbConnection::EntityManager()->getRepository(Product::class);
   $products = $productRepository->findAll();
   
   return $products;

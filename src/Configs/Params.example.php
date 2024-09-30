@@ -6,11 +6,20 @@ class ParamsExample {
   
   public static function getParamDb() {
     return [
-      'host' => '',
-      'user' => '',
-      'password' => '',
-      'dbname' => '',
-      'prefix_table' => ''
+      'default' => [
+        'host' => 'localhost',
+        'user' => '',
+        'password' => '',
+        'dbname' => '',
+        'prefix_table' => ''
+      ],
+      'smf_v2' => [
+        'host' => 'localhost',
+        'user' => '',
+        'password' => '',
+        'dbname' => '',
+        'prefix_table' => ''
+      ]
     ];
   }
 }

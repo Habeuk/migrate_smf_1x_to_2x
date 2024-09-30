@@ -2,7 +2,7 @@
 
 namespace Habeuk\MigrateSmf1xTo2x\Entity;
 
-use Habeuk\MigrateSmf1xTo2x\Configs\DbConnetion;
+use Habeuk\MigrateSmf1xTo2x\Configs\DbConnection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,7 +41,7 @@ class Product {
    * @return array
    */
   public function getAllProducts() {
-    $productRepository = DbConnetion::EntityManager()->getRepository(self::class);
+    $productRepository = DbConnection::EntityManager()->getRepository(self::class);
     return $productRepository->findAll();
   }
 }

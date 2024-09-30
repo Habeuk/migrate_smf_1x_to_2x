@@ -41,6 +41,7 @@ class DbConnection {
    * @var QueryBuilderHelper
    */
   private static $queryBuilder = [];
+  public static $lastInstance;
   
   function __construct($key_database = 'default') {
     $this->key_database = $key_database;
@@ -57,6 +58,7 @@ class DbConnection {
       $connectManager = new self($key);
       $params = $connectManager->getDataBaseConfig();
       $QueryBuilderHelper = new QueryBuilderHelper($connectManager->connection());
+      self::$lastInstance = $connectManager;
       if (!empty($params['prefix_table'])) {
         $QueryBuilderHelper->setPrefixTable($params['prefix_table']);
       }

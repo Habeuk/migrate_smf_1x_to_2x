@@ -3,7 +3,8 @@
 namespace Habeuk\MigrateSmf1xTo2x\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Habeuk\MigrateSmf1xTo2x\Configs\DbConnetion;
+use Habeuk\MigrateSmf1xTo2x\Configs\DbConnection;
+use Habeuk\MigrateSmf1xTo2x\Repositories\BaseEntity;
 
 /**
  * Entité permettant de gerer les membres.
@@ -11,6 +12,7 @@ use Habeuk\MigrateSmf1xTo2x\Configs\DbConnetion;
 #[ORM\Entity]
 #[ORM\Table(name: 'members')]
 class Members {
+  use BaseEntity;
   /**
    * id
    */
@@ -102,7 +104,7 @@ class Members {
   /**
    * id
    */
-  #[ORM\Column(type: 'datetime')]
+  #[ORM\Column(type: 'string')]
   private $birthdate;
   /**
    * id
@@ -288,21 +290,74 @@ class Members {
   private $memberIP2;
   
   /**
-   * Recupere tous les produits.
    *
-   * @return array
+   * @return string
    */
-  public function getAllMembers() {
-    $EntityManager = DbConnetion::EntityManager();
-    $QB = $EntityManager->createQueryBuilder();
-    $QB->select('m')->from(self::class, "m");
-    $QB->setFirstResult(0);
-    $QB->setMaxResults(30);
-    $query = $QB->getQuery();
-    $membres = $query->getResult();
-    dump($membres);
-    // $productRepository =
-    // DbConnetion::EntityManager()->getRepository(self::class);
-    // return $productRepository->findAll();
+  protected function getTable() {
+    return 'members';
+  }
+  
+  protected function getColumnId() {
+    return 'ID_MEMBER';
+  }
+  
+  protected function getColumnIdInfo() {
+    return [
+      'smf_1' => 'ID_MEMBER',
+      'smf_2' => 'id_member'
+    ];
+  }
+  
+  protected function buildRow(Members $row) {
+    $mergeDatas = [
+      'id_member' => $row->ID_MEMBER,
+      'member_name' => $row->memberName,
+      'date_registered' => $row->dateRegistered,
+      'posts' => $row->posts,
+      'id_group' => $row->ID_GROUP,
+      'lngfile' => $row->lngfile,
+      'last_login' => $row->lastLogin,
+      'real_name' => $row->realName,
+      'instant_messages' => $row->instantMessages,
+      'unread_messages' => $row->unreadMessages,
+      'new_pm' => 0,
+      'alerts' => 0,
+      'buddy_list' => $row->buddy_list,
+      'pm_prefs' => 0,
+      'mod_prefs' => '',
+      'passwd' => $row->passwd,
+      'email_address' => $row->emailAddress,
+      'personal_text' => $row->personalText,
+      'birthdate' => $row->birthdate,
+      'website_title' => $row->websiteTitle,
+      'website_url' => $row->websiteUrl,
+      'show_online' => $row->showOnline,
+      'time_format' => $row->timeFormat,
+      'signature' => $row->signature,
+      'time_offset' => $row->timeOffset,
+      'avatar' => $row->avatar,
+      'usertitle' => $row->usertitle,
+      'member_ip' => $row->memberIP,
+      'member_ip2' => $row->memberIP2,
+      'secret_question' => $row->secretQuestion,
+      'secret_answer' => $row->secretAnswer,
+      'id_theme' => $row->ID_THEME,
+      'is_activated' => $row->is_activated,
+      'validation_code' => $row->validation_code,
+      'id_msg_last_visit' => $row->ID_MSG_LAST_VISIT,
+      'additional_groups' => $row->additionalGroups,
+      'smiley_set' => $row->smileySet,
+      'id_post_group' => $row->ID_POST_GROUP,
+      'total_time_logged_in' => $row->totalTimeLoggedIn,
+      'password_salt' => $row->passwordSalt,
+      'ignore_boards' => '',
+      'warning' => 0,
+      'passwd_flood' => '',
+      'pm_receive_from' => 1,
+      'timezone' => '',
+      'tfa_secret' => '',
+      'tfa_backup' => ''
+    ];
+    return $mergeDatas;
   }
 }

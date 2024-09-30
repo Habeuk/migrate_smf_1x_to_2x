@@ -16,6 +16,11 @@ class HomeController {
     return new Response('Bonjour, Symfony!');
   }
   
+  /**
+   * --
+   *
+   * @return \Symfony\Component\HttpFoundation\Response
+   */
   public function members() {
     $members = new \Habeuk\MigrateSmf1xTo2x\Entity\Members();
     $members->getAllMembers();

@@ -35,7 +35,7 @@ try {
   ], []);
 }
 catch (ResourceNotFoundException $e) {
-  $response = new Response('Page not found', 404);
+  $response = new Response("Page not found", 404);
 }
 catch (Exception $e) {
   $response = new Response($e->getMessage(), 500);

@@ -16,6 +16,7 @@ use Habeuk\MigrateSmf1xTo2x\Entity\PersonalMessages;
 use Habeuk\MigrateSmf1xTo2x\Entity\Moderators;
 use Habeuk\MigrateSmf1xTo2x\Entity\Permissions;
 use Habeuk\MigrateSmf1xTo2x\Entity\PmRecipients;
+use Habeuk\MigrateSmf1xTo2x\Entity\PollChoices;
 
 /**
  *
@@ -39,6 +40,13 @@ class ImportDatasController {
     $Polls->saveResultInVersion2x();
     dump($Polls->getresults());
     return new Response("Importe des Polls ");
+  }
+  
+  public function ImportPollChoices() {
+    $entity = new PollChoices();
+    $entity->saveResultInVersion2x();
+    dump($entity->getresults());
+    return new Response(" Importe des PollChoices ");
   }
   
   public function ImportPmRecipients() {
@@ -76,9 +84,9 @@ class ImportDatasController {
     return new Response("Importe des MessageIcons");
   }
   
-  public function ImportMessages() {
+  public function ImportMessages($page, $limit) {
     $entity = new Messages();
-    $entity->saveResultInVersion2x();
+    $entity->saveResultInVersion2x($page, $limit);
     dump($entity->getresults());
     return new Response("Importe des Messages");
   }

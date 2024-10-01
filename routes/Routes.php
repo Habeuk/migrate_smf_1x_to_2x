@@ -34,9 +34,13 @@ $routes->add('import_boards', new Route('/import-boards', [
 $routes->add('import_topics', new Route('/import-topics', [
   '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportTopics'
 ]));
-$routes->add('import_messages', new Route('/import-messages', [
-  '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportMessages'
-]));
+$routes->add('import_messages',
+  new Route('/import-messages/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportMessages'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
 $routes->add('import_messages_icons', new Route('/import-messages-icons', [
   '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportMessagesIcons'
 ]));
@@ -51,5 +55,8 @@ $routes->add('import_Permissions', new Route('/import-permissions', [
 ]));
 $routes->add('import_pm_recipients', new Route('/import-pm_recipients', [
   '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportPmRecipients'
+]));
+$routes->add('import_poll_choices', new Route('/import-poll_choices', [
+  '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportPollChoices'
 ]));
 return $routes;

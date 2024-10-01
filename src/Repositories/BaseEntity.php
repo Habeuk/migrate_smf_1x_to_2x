@@ -22,12 +22,12 @@ trait BaseEntity {
    *
    * @return array
    */
-  public function getDatas() {
+  public function getDatas($page = 0, $limit = 100) {
     $EntityManager = DbConnection::EntityManager();
     $QB = $EntityManager->createQueryBuilder();
     $QB->select('m')->from(self::class, "m");
-    $QB->setFirstResult(0);
-    $QB->setMaxResults(100);
+    $QB->setFirstResult($page);
+    $QB->setMaxResults($limit);
     $QB->orderBy('m.' . $this->getColumnId(), 'ASC');
     $query = $QB->getQuery();
     return $query->getResult();
@@ -36,13 +36,13 @@ trait BaseEntity {
   /**
    * Recupere les données de l'ancienne base de données pour la nouvelle.
    */
-  public function saveResultInVersion2x() {
+  public function saveResultInVersion2x($page = 0, $limit = 100) {
     /**
      *
      * @var \Habeuk\MigrateSmf1xTo2x\Configs\QueryBuilderHelper $cQB
      */
     $cQB = DbConnection::connectionQueryBuilder('smf_v2');
-    $table = $this->getTable();
+    $table = $this->getTable($page, $limit);
     $colmunIdInfo = $this->getColumnIdInfo();
     $rows = $this->getDatas();
     $this->results['total'] = count($rows);

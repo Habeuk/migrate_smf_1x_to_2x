@@ -4,6 +4,7 @@ namespace Habeuk\MigrateSmf1xTo2x\Repositories;
 
 use Doctrine\ORM\Mapping as ORM;
 use Habeuk\MigrateSmf1xTo2x\Configs\DbConnection;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  *
@@ -20,17 +21,20 @@ trait BaseEntity {
   /**
    * Recupere tous les produits.
    *
-   * @return array
+   * @param int $page
+   * @param int $limit
+   * @return \Doctrine\ORM\Tools\Pagination\Paginator
    */
-  public function getDatas($page = 0, $limit = 100) {
+  public function getDatas($page, $limit) {
     $EntityManager = DbConnection::EntityManager();
     $QB = $EntityManager->createQueryBuilder();
     $QB->select('m')->from(self::class, "m");
-    $QB->setFirstResult($page);
+    $QB->setFirstResult($page * $limit);
     $QB->setMaxResults($limit);
     $QB->orderBy('m.' . $this->getColumnId(), 'ASC');
     $query = $QB->getQuery();
-    return $query->getResult();
+    $paginator = new Paginator($query, fetchJoinCollection: true);
+    return $paginator;
   }
   
   /**
@@ -42,11 +46,18 @@ trait BaseEntity {
      * @var \Habeuk\MigrateSmf1xTo2x\Configs\QueryBuilderHelper $cQB
      */
     $cQB = DbConnection::connectionQueryBuilder('smf_v2');
-    $table = $this->getTable($page, $limit);
+    $table = $this->getTable();
     $colmunIdInfo = $this->getColumnIdInfo();
-    $rows = $this->getDatas();
-    $this->results['total'] = count($rows);
-    foreach ($this->getDatas() as $Membergroups) {
+    /**
+     *
+     * @var \Doctrine\ORM\Tools\Pagination\Paginator $paginator
+     */
+    $paginator = $this->getDatas($page, $limit);
+    $nbre = $paginator->count();
+    $this->results['limit'] = $limit;
+    $this->results['current_page'] = $page . "/" . (ceil($nbre / $limit));
+    $this->results['total'] = $nbre;
+    foreach ($paginator as $Membergroups) {
       $row = $this->buildRow($Membergroups);
       $this->insertOrUpdate($colmunIdInfo['smf_2'], $Membergroups->{$colmunIdInfo['smf_1']}, $table, $row, $cQB);
     }

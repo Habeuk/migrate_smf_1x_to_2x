@@ -19,95 +19,127 @@ class Messages {
   #[ORM\Id]
   #[ORM\Column(type: 'integer')]
   #[ORM\GeneratedValue]
-  private $ID_ATTACH;
+  private $ID_MSG;
   
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $ID_THUMB;
+  private string $ID_TOPIC;
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $ID_MSG;
+  private string $ID_BOARD;
+  /**
+   * memberName
+   */
+  #[ORM\Column(type: 'integer')]
+  private string $posterTime;
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
   private string $ID_MEMBER;
-  /**
-   * memberName
-   */
-  #[ORM\Column(type: 'text')]
-  private string $filename;
   
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $size;
+  private string $ID_MSG_MODIFIED;
+  /**
+   * memberName
+   */
+  #[ORM\Column(type: 'text')]
+  private string $subject;
+  /**
+   * memberName
+   */
+  #[ORM\Column(type: 'text')]
+  private string $posterName;
+  /**
+   * memberName
+   */
+  #[ORM\Column(type: 'text')]
+  private string $posterEmail;
+  /**
+   * memberName
+   */
+  #[ORM\Column(type: 'text')]
+  private string $posterIP;
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $downloads;
+  private string $smileysEnabled;
+  
+  /**
+   * memberName
+   */
+  #[ORM\Column(type: 'integer')]
+  private string $modifiedTime;
+  /**
+   * memberName
+   */
+  #[ORM\Column(type: 'text')]
+  private string $modifiedName;
+  
+  /**
+   * memberName
+   */
+  #[ORM\Column(type: 'text')]
+  private string $body;
+  
   /**
    * memberName
    */
   #[ORM\Column(type: 'string')]
-  private string $file_hash;
-  /**
-   * memberName
-   */
-  #[ORM\Column(type: 'integer')]
-  private string $attachmentType;
-  /**
-   * memberName
-   */
-  #[ORM\Column(type: 'integer')]
-  private string $width;
-  /**
-   * memberName
-   */
-  #[ORM\Column(type: 'integer')]
-  private string $height;
+  private string $icon;
   
   /**
    *
    * @return string
    */
   protected function getTable() {
-    return 'attachments';
+    return 'messages';
   }
   
   protected function getColumnId() {
-    return 'ID_ATTACH';
+    return 'ID_MSG';
   }
   
   protected function getColumnIdInfo() {
     return [
-      'smf_1' => 'ID_ATTACH',
-      'smf_2' => 'id_attach'
+      'smf_1' => 'ID_MSG',
+      'smf_2' => 'id_msg'
     ];
   }
   
+  /**
+   *
+   * @param Messages $row
+   * @return string[]|number[]|NULL[]
+   */
   protected function buildRow(Messages $row) {
     return [
-      'id_attach' => $row->ID_ATTACH,
-      'id_thumb' => $row->ID_THUMB,
       'id_msg' => $row->ID_MSG,
+      'id_topic' => $row->ID_TOPIC,
+      'id_board' => $row->ID_BOARD,
+      'poster_time' => $row->posterTime,
       'id_member' => $row->ID_MEMBER,
-      'id_folder' => 0,
-      'attachment_type' => $row->attachmentType,
-      'filename' => $row->filename,
-      'size' => $row->size,
-      'downloads' => $row->downloads,
-      'file_hash' => $row->file_hash,
-      'width' => $row->width,
-      'height' => $row->height,
-      'mime_type' => '',
-      'approved' => 1
+      'id_msg_modified' => $row->ID_MSG_MODIFIED,
+      'subject' => $row->subject,
+      'poster_name' => $row->posterName,
+      'poster_email' => $row->posterEmail,
+      'poster_ip' => $row->posterIP,
+      'smileys_enabled' => $row->smileysEnabled,
+      'modified_time' => $row->modifiedTime,
+      'modified_name' => $row->modifiedName,
+      'modified_reason' => '',
+      'body' => $row->body,
+      'icon' => $row->icon,
+      'approved' => 1,
+      "likes" => 0
     ];
   }
 }

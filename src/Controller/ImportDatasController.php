@@ -10,6 +10,12 @@ use Habeuk\MigrateSmf1xTo2x\Entity\Categories;
 use Habeuk\MigrateSmf1xTo2x\Entity\Polls;
 use Habeuk\MigrateSmf1xTo2x\Entity\Boards;
 use Habeuk\MigrateSmf1xTo2x\Entity\Topics;
+use Habeuk\MigrateSmf1xTo2x\Entity\Messages;
+use Habeuk\MigrateSmf1xTo2x\Entity\MessageIcons;
+use Habeuk\MigrateSmf1xTo2x\Entity\PersonalMessages;
+use Habeuk\MigrateSmf1xTo2x\Entity\Moderators;
+use Habeuk\MigrateSmf1xTo2x\Entity\Permissions;
+use Habeuk\MigrateSmf1xTo2x\Entity\PmRecipients;
 
 /**
  *
@@ -33,6 +39,48 @@ class ImportDatasController {
     $Polls->saveResultInVersion2x();
     dump($Polls->getresults());
     return new Response("Importe des Polls ");
+  }
+  
+  public function ImportPmRecipients() {
+    $entity = new PmRecipients();
+    $entity->saveResultInVersion2x();
+    dump($entity->getresults());
+    return new Response(" Importe des PmRecipients ");
+  }
+  
+  public function ImportPermissions() {
+    $entity = new Permissions();
+    $entity->saveResultInVersion2x();
+    dump($entity->getresults());
+    return new Response(" Importe des Permissions ");
+  }
+  
+  public function ImportModerators() {
+    $entity = new Moderators();
+    $entity->saveResultInVersion2x();
+    dump($entity->getresults());
+    return new Response("Importe des Moderators");
+  }
+  
+  public function ImportPersonalMessages() {
+    $entity = new PersonalMessages();
+    $entity->saveResultInVersion2x();
+    dump($entity->getresults());
+    return new Response("Importe des PersonalMessages");
+  }
+  
+  public function ImportMessagesIcons() {
+    $entity = new MessageIcons();
+    $entity->saveResultInVersion2x();
+    dump($entity->getresults());
+    return new Response("Importe des MessageIcons");
+  }
+  
+  public function ImportMessages() {
+    $entity = new Messages();
+    $entity->saveResultInVersion2x();
+    dump($entity->getresults());
+    return new Response("Importe des Messages");
   }
   
   public function ImportTopics() {

@@ -114,4 +114,105 @@ $routes->add('import_poll_choices',
     'page' => '[0-9]+',
     'limit' => '[0-9]+'
   ]));
+$routes->add('import_board_permissions',
+  new Route('/import-board_permissions/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportBoardPermissions'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
+$routes->add('import-log_activity',
+  new Route('/import-log_activity/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportLogActivity'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
+$routes->add('import-log_banned',
+  new Route('/import-log_banned/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportLogBanned'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
+$routes->add('import-log_boards',
+  new Route('/import-log_boards/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportLogBoards'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
+$routes->add('import-log_errors',
+  new Route('/import-log_errors/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportLogErrors'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
+$routes->add('import-log_mark_read',
+  new Route('/import-log_mark_read/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportLogMarkRead'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
+$routes->add('import-log_notify',
+  new Route('/import-log_notify/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportLogNotify'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
+$routes->add('import-log_online',
+  new Route('/import-log_online/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportLogOnline'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
+$routes->add('import-log_polls',
+  new Route('/import-log_polls/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportLogPolls'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
+$routes->add('import-log_search_messages',
+  new Route('/import-log_search_messages/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportLogSearchMessages'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
+$routes->add('import-log_search_results',
+  new Route('/import-log_search_results/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportLogSearchResults'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
+$routes->add('import-log_search_subjects',
+  new Route('/import-log_search_subjects/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportLogSearchSubjects'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
+
+$routes->add('import-log_search_topics',
+  new Route('/import-log_search_topics/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportLogSearchTopics'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
+$routes->add('import-smileys',
+  new Route('/import-smileys/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportSmileys'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
+
+//
 return $routes;

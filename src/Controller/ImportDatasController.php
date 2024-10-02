@@ -17,6 +17,20 @@ use Habeuk\MigrateSmf1xTo2x\Entity\Moderators;
 use Habeuk\MigrateSmf1xTo2x\Entity\Permissions;
 use Habeuk\MigrateSmf1xTo2x\Entity\PmRecipients;
 use Habeuk\MigrateSmf1xTo2x\Entity\PollChoices;
+use Habeuk\MigrateSmf1xTo2x\Entity\BoardPermissions;
+use Habeuk\MigrateSmf1xTo2x\Entity\LogActivity;
+use Habeuk\MigrateSmf1xTo2x\Entity\LogBanned;
+use Habeuk\MigrateSmf1xTo2x\Entity\LogBoards;
+use Habeuk\MigrateSmf1xTo2x\Entity\LogErrors;
+use Habeuk\MigrateSmf1xTo2x\Entity\LogMarkRead;
+use Habeuk\MigrateSmf1xTo2x\Entity\LogNotify;
+use Habeuk\MigrateSmf1xTo2x\Entity\LogOnline;
+use Habeuk\MigrateSmf1xTo2x\Entity\LogPolls;
+use Habeuk\MigrateSmf1xTo2x\Entity\LogSearchMessages;
+use Habeuk\MigrateSmf1xTo2x\Entity\LogSearchResults;
+use Habeuk\MigrateSmf1xTo2x\Entity\LogSearchSubjects;
+use Habeuk\MigrateSmf1xTo2x\Entity\LogSearchTopics;
+use Habeuk\MigrateSmf1xTo2x\Entity\Smileys;
 
 /**
  *
@@ -24,6 +38,97 @@ use Habeuk\MigrateSmf1xTo2x\Entity\PollChoices;
  *        
  */
 class ImportDatasController {
+  
+  public function ImportSmileys($page, $limit) {
+    $entity = new Smileys();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des LogSearchTopics ");
+  }
+  
+  public function ImportLogSearchTopics($page, $limit) {
+    $entity = new LogSearchTopics();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des LogSearchTopics ");
+  }
+  
+  public function ImportLogSearchSubjects($page, $limit) {
+    $entity = new LogSearchSubjects();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des LogSearchSubjects ");
+  }
+  
+  public function ImportLogSearchResults($page, $limit) {
+    $entity = new LogSearchResults();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des LogSearchResults ");
+  }
+  
+  public function ImportLogSearchMessages($page, $limit) {
+    $entity = new LogSearchMessages();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des LogSearchMessages ");
+  }
+  
+  public function ImportLogPolls($page, $limit) {
+    $entity = new LogPolls();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des LogPolls ");
+  }
+  
+  public function ImportLogOnline($page, $limit) {
+    $entity = new LogOnline();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des LogOnline ");
+  }
+  
+  public function ImportLogNotify($page, $limit) {
+    $entity = new LogNotify();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des LogNotify ");
+  }
+  
+  public function ImportLogMarkRead($page, $limit) {
+    $entity = new LogMarkRead();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des LogMarkRead ");
+  }
+  
+  public function ImportLogErrors($page, $limit) {
+    $entity = new LogErrors();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des LogErrors ");
+  }
+  
+  public function ImportLogBoards($page, $limit) {
+    $entity = new LogBoards();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des LogBoards ");
+  }
+  
+  public function ImportLogBanned($page, $limit) {
+    $entity = new LogBanned();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des LogBanned ");
+  }
+  
+  public function ImportLogActivity($page, $limit) {
+    $entity = new LogActivity();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des LogActivity ");
+  }
   
   /**
    * Importe les groupes de membles et les données requises.
@@ -127,5 +232,12 @@ class ImportDatasController {
     $Categories->saveResultInVersion2x($page, $limit);
     dump($Categories->getresults());
     return new Response("Importe des Categories ");
+  }
+  
+  public function ImportBoardPermissions($page, $limit) {
+    $entity = new BoardPermissions();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des BoardPermissions ");
   }
 }

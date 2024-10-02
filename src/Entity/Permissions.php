@@ -5,6 +5,7 @@ namespace Habeuk\MigrateSmf1xTo2x\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Habeuk\MigrateSmf1xTo2x\Configs\DbConnection;
 use Habeuk\MigrateSmf1xTo2x\Repositories\BaseEntity;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * Entité permettant de gerer les membres.
@@ -18,14 +19,14 @@ class Permissions {
    */
   #[ORM\Id]
   #[ORM\Column(type: 'integer')]
-  #[ORM\GeneratedValue]
   private $ID_GROUP;
   
   /**
    * memberName
    */
+  #[ORM\Id]
   #[ORM\Column(type: 'string')]
-  private string $permission;
+  private $permission;
   /**
    * memberName
    */
@@ -64,12 +65,44 @@ class Permissions {
    *
    * @return array
    */
-  public function getDatas() {
+  public function getDatas($page, $limit) {
     $EntityManager = DbConnection::EntityManager();
     $QB = $EntityManager->createQueryBuilder();
     $QB->select('m')->from(self::class, "m");
+    $QB->setFirstResult($page * $limit);
+    $QB->setMaxResults($limit);
+    $QB->orderBy('m.permission', 'ASC');
     $query = $QB->getQuery();
     return $query->getResult();
+    // paginator not work with multiple key.
+    // $paginator = new Paginator($query, fetchJoinCollection: true);
+    // return $paginator;
+  }
+  
+  /**
+   * Recupere les données de l'ancienne base de données pour la nouvelle.
+   */
+  public function saveResultInVersion2x($page = 0, $limit = 100) {
+    /**
+     *
+     * @var \Habeuk\MigrateSmf1xTo2x\Configs\QueryBuilderHelper $cQB
+     */
+    $cQB = DbConnection::connectionQueryBuilder('smf_v2');
+    $table = $this->getTable();
+    $colmunIdInfo = $this->getColumnIdInfo();
+    /**
+     *
+     * @var \Doctrine\ORM\Tools\Pagination\Paginator $paginator
+     */
+    $rows = $this->getDatas($page, $limit);
+    $nbre = count($rows);
+    $this->results['limit'] = $limit;
+    $this->results['current_page'] = $page . "/" . (ceil($nbre / $limit));
+    $this->results['total'] = $nbre;
+    foreach ($rows as $Membergroups) {
+      $row = $this->buildRow($Membergroups);
+      $this->insertOrUpdate($colmunIdInfo['smf_2'], $Membergroups->{$colmunIdInfo['smf_1']}, $table, $row, $cQB);
+    }
   }
   
   /**

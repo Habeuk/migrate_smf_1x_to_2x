@@ -23,6 +23,7 @@ class PollChoices {
   /**
    * memberName
    */
+  #[ORM\Id]
   #[ORM\Column(type: 'integer')]
   private string $ID_CHOICE;
   /**
@@ -62,6 +63,52 @@ class PollChoices {
       'label' => $row->label,
       'votes' => $row->votes
     ];
+  }
+  
+  /**
+   * Recupere tous les produits.
+   *
+   * @return array
+   */
+  public function getDatas($page, $limit) {
+    $EntityManager = DbConnection::EntityManager();
+    $QB = $EntityManager->createQueryBuilder();
+    $QB->select('m')->from(self::class, "m");
+    $QB->setFirstResult($page * $limit);
+    $QB->setMaxResults($limit);
+    $QB->addOrderBy('m.ID_POLL', 'ASC');
+    $QB->addOrderBy('m.ID_CHOICE', 'ASC');
+    $query = $QB->getQuery();
+    return $query->getResult();
+    // paginator not work with multiple key.
+    // $paginator = new Paginator($query, fetchJoinCollection: true);
+    // return $paginator;
+  }
+  
+  /**
+   * Recupere les données de l'ancienne base de données pour la nouvelle.
+   */
+  public function saveResultInVersion2x($page = 0, $limit = 100) {
+    /**
+     *
+     * @var \Habeuk\MigrateSmf1xTo2x\Configs\QueryBuilderHelper $cQB
+     */
+    $cQB = DbConnection::connectionQueryBuilder('smf_v2');
+    $table = $this->getTable();
+    $colmunIdInfo = $this->getColumnIdInfo();
+    /**
+     *
+     * @var \Doctrine\ORM\Tools\Pagination\Paginator $paginator
+     */
+    $rows = $this->getDatas($page, $limit);
+    $nbre = count($rows);
+    $this->results['limit'] = $limit;
+    $this->results['current_page'] = $page . "/" . (ceil($nbre / $limit));
+    $this->results['total'] = $nbre;
+    foreach ($rows as $Membergroups) {
+      $row = $this->buildRow($Membergroups);
+      $this->insertOrUpdate($colmunIdInfo['smf_2'], $Membergroups->{$colmunIdInfo['smf_1']}, $table, $row, $cQB);
+    }
   }
   
   /**

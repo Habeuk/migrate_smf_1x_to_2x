@@ -28,51 +28,51 @@ class ImportDatasController {
   /**
    * Importe les groupes de membles et les données requises.
    */
-  public function ImportGroupsMembers() {
+  public function ImportGroupsMembers($page, $limit) {
     $Membergroups = new Membergroups();
-    $Membergroups->saveResultInVersion2x();
+    $Membergroups->saveResultInVersion2x($page, $limit);
     dump($Membergroups->getresults());
     return new Response("Importe les groupes de membles et les données requises");
   }
   
-  public function ImportPolls() {
+  public function ImportPolls($page, $limit) {
     $Polls = new Polls();
-    $Polls->saveResultInVersion2x();
+    $Polls->saveResultInVersion2x($page, $limit);
     dump($Polls->getresults());
     return new Response("Importe des Polls ");
   }
   
-  public function ImportPollChoices() {
+  public function ImportPollChoices($page, $limit) {
     $entity = new PollChoices();
-    $entity->saveResultInVersion2x();
+    $entity->saveResultInVersion2x($page, $limit);
     dump($entity->getresults());
     return new Response(" Importe des PollChoices ");
   }
   
-  public function ImportPmRecipients() {
+  public function ImportPmRecipients($page, $limit) {
     $entity = new PmRecipients();
-    $entity->saveResultInVersion2x();
+    $entity->saveResultInVersion2x($page, $limit);
     dump($entity->getresults());
     return new Response(" Importe des PmRecipients ");
   }
   
-  public function ImportPermissions() {
+  public function ImportPermissions($page, $limit) {
     $entity = new Permissions();
-    $entity->saveResultInVersion2x();
+    $entity->saveResultInVersion2x($page, $limit);
     dump($entity->getresults());
     return new Response(" Importe des Permissions ");
   }
   
-  public function ImportModerators() {
+  public function ImportModerators($page, $limit) {
     $entity = new Moderators();
-    $entity->saveResultInVersion2x();
+    $entity->saveResultInVersion2x($page, $limit);
     dump($entity->getresults());
     return new Response("Importe des Moderators");
   }
   
-  public function ImportPersonalMessages() {
+  public function ImportPersonalMessages($page, $limit) {
     $entity = new PersonalMessages();
-    $entity->saveResultInVersion2x();
+    $entity->saveResultInVersion2x($page, $limit);
     dump($entity->getresults());
     return new Response("Importe des PersonalMessages");
   }
@@ -91,16 +91,16 @@ class ImportDatasController {
     return new Response("Importe des Messages");
   }
   
-  public function ImportTopics() {
+  public function ImportTopics($page, $limit) {
     $entity = new Topics();
-    $entity->saveResultInVersion2x();
+    $entity->saveResultInVersion2x($page, $limit);
     dump($entity->getresults());
     return new Response("Importe des Topics ");
   }
   
-  public function ImportPoards() {
+  public function ImportPoards($page, $limit) {
     $Boards = new Boards();
-    $Boards->saveResultInVersion2x();
+    $Boards->saveResultInVersion2x($page, $limit);
     dump($Boards->getresults());
     return new Response("Importe des Boards ");
   }
@@ -108,23 +108,23 @@ class ImportDatasController {
   /**
    * --
    */
-  public function ImportMembers() {
+  public function ImportMembers($page, $limit) {
     $Members = new Members();
-    $Members->saveResultInVersion2x();
+    $Members->saveResultInVersion2x($page, $limit);
     dump($Members->getresults());
     return new Response("Importe des utilisateurs");
   }
   
-  public function ImportAttachments() {
+  public function ImportAttachments($page, $limit) {
     $Attachments = new Attachments();
-    $Attachments->saveResultInVersion2x();
+    $Attachments->saveResultInVersion2x($page, $limit);
     dump($Attachments->getresults());
     return new Response("Importe des Attachments ");
   }
   
-  public function ImportCategories() {
+  public function ImportCategories($page, $limit) {
     $Categories = new Categories();
-    $Categories->saveResultInVersion2x();
+    $Categories->saveResultInVersion2x($page, $limit);
     dump($Categories->getresults());
     return new Response("Importe des Categories ");
   }

@@ -60,17 +60,17 @@ class Boards {
   /**
    * memberName
    */
-  #[ORM\Column(type: 'integer')]
+  #[ORM\Column(type: 'string')]
   private string $memberGroups;
   /**
    * memberName
    */
-  #[ORM\Column(type: 'string')]
+  #[ORM\Column(type: 'text')]
   private string $name;
   /**
    * memberName
    */
-  #[ORM\Column(type: 'string')]
+  #[ORM\Column(type: 'text')]
   private string $description;
   /**
    * memberName

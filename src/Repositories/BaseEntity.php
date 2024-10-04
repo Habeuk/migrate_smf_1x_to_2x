@@ -33,6 +33,12 @@ trait BaseEntity {
     $QB->setMaxResults($limit);
     $QB->orderBy('m.' . $this->getColumnId(), 'ASC');
     $query = $QB->getQuery();
+    try {
+      $query->getResult();
+    }
+    catch (\Exception $e) {
+      dd($e->getMessage());
+    }
     $paginator = new Paginator($query, fetchJoinCollection: true);
     return $paginator;
   }

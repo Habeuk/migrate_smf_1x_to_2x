@@ -17,6 +17,11 @@ trait BaseEntity {
     'update' => 0,
     'total' => 0
   ];
+  /**
+   *
+   * @var array
+   */
+  protected $settingsconfig = [];
   
   /**
    * Recupere tous les produits.
@@ -41,6 +46,27 @@ trait BaseEntity {
     }
     $paginator = new Paginator($query, fetchJoinCollection: true);
     return $paginator;
+  }
+  
+  /**
+   * Recupere les données de configurations.
+   *
+   * @param string $key_db
+   */
+  public function getSettingsConfig($key_db = 'smf_v2') {
+    if (empty($this->settingsconfig[$key_db])) {
+      $cQB = DbConnection::connectionQueryBuilder($key_db);
+      $cQB->select('variable', 'value');
+      $cQB->from('settings', 'dd');
+      $query = $cQB->executeQuery();
+      $results = $query->fetchAllKeyValue();
+      // On formatte la liste des tableaux.
+      if (!empty($results['attachmentUploadDir'])) {
+        $results['attachmentUploadDir'] = json_decode($results['attachmentUploadDir'], true);
+      }
+      $this->settingsconfig[$key_db] = $results;
+    }
+    return $this->settingsconfig[$key_db];
   }
   
   /**

@@ -76,6 +76,12 @@ class Attachments {
   
   /**
    *
+   * @var string
+   */
+  protected $directoryFiles = null;
+  
+  /**
+   *
    * @return string
    */
   protected function getTable() {
@@ -159,13 +165,24 @@ class Attachments {
     }
   }
   
+  protected function getdirectoryFiles() {
+    if (!$this->directoryFiles) {
+      $settings = $this->getSettingsConfig();
+      if (!empty($settings['attachmentUploadDir'])) {
+        $this->directoryFiles = array_key_first($settings['attachmentUploadDir']);
+      }
+      throw new \ErrorException("Impossible de determiner le dossier qui contiendra les images");
+    }
+    return $this->directoryFiles;
+  }
+  
   protected function buildRow(Attachments $row) {
     return [
       'id_attach' => $row->ID_ATTACH,
       'id_thumb' => $row->ID_THUMB,
       'id_msg' => $row->ID_MSG,
       'id_member' => $row->ID_MEMBER,
-      'id_folder' => 0,
+      'id_folder' => $this->getdirectoryFiles(),
       'attachment_type' => $row->attachmentType,
       'filename' => $row->filename,
       'size' => $row->size,

@@ -40,6 +40,13 @@ use Habeuk\MigrateSmf1xTo2x\Entity\BoardsPermissionsView;
  */
 class ImportDatasController {
   
+  public function ImportAttachmentsRenameFile($page, $limit) {
+    $entity = new Attachments();
+    $entity->updateNameFiles($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des rename files ");
+  }
+  
   public function ImportBoardsPermissionView($page, $limit) {
     $entity = new BoardsPermissionsView();
     $entity->saveResultInVersion2x($page, $limit);

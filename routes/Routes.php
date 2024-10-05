@@ -37,6 +37,13 @@ $routes->add('import_attachments',
     'page' => '[0-9]+',
     'limit' => '[0-9]+'
   ]));
+$routes->add('import_attachments_rename_file',
+  new Route('/import-attachments_rename_file/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportAttachmentsRenameFile'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
 $routes->add('import_categories',
   new Route('/import-categories/{page}/{limit}', [
     '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportCategories'

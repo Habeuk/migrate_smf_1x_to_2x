@@ -31,6 +31,7 @@ use Habeuk\MigrateSmf1xTo2x\Entity\LogSearchResults;
 use Habeuk\MigrateSmf1xTo2x\Entity\LogSearchSubjects;
 use Habeuk\MigrateSmf1xTo2x\Entity\LogSearchTopics;
 use Habeuk\MigrateSmf1xTo2x\Entity\Smileys;
+use Habeuk\MigrateSmf1xTo2x\Entity\BoardsPermissionsView;
 
 /**
  *
@@ -38,6 +39,13 @@ use Habeuk\MigrateSmf1xTo2x\Entity\Smileys;
  *        
  */
 class ImportDatasController {
+  
+  public function ImportBoardsPermissionView($page, $limit) {
+    $entity = new BoardsPermissionsView();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des BoardsPermissionsView ");
+  }
   
   public function ImportSmileys($page, $limit) {
     $entity = new Smileys();

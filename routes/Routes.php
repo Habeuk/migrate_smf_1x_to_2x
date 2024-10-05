@@ -58,6 +58,13 @@ $routes->add('import_boards',
     'page' => '[0-9]+',
     'limit' => '[0-9]+'
   ]));
+$routes->add('import_boards_permission_view',
+  new Route('/import-boards_permission_view/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportBoardsPermissionView'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
 $routes->add('import_topics',
   new Route('/import-topics/{page}/{limit}', [
     '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportTopics'

@@ -3,7 +3,7 @@
 namespace Habeuk\MigrateSmf1xTo2x\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
-use Habeuk\MigrateSmf1xTo2x\Configs\DbConnetion;
+use Habeuk\MigrateSmf1xTo2x\Configs\DbConnection;
 
 /**
  *

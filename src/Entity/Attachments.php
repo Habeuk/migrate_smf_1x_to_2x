@@ -166,12 +166,13 @@ class Attachments {
   }
   
   protected function getdirectoryFiles() {
-    if (!$this->directoryFiles) {
+    if ($this->directoryFiles === null) {
       $settings = $this->getSettingsConfig();
       if (!empty($settings['attachmentUploadDir'])) {
         $this->directoryFiles = array_key_first($settings['attachmentUploadDir']);
       }
-      throw new \ErrorException("Impossible de determiner le dossier qui contiendra les images");
+      else
+        throw new \ErrorException("Impossible de determiner le dossier qui contiendra les images");
     }
     return $this->directoryFiles;
   }

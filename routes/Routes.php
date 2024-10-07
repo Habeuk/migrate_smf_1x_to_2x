@@ -227,6 +227,20 @@ $routes->add('import-smileys',
     'page' => '[0-9]+',
     'limit' => '[0-9]+'
   ]));
+$routes->add('import-ban_groups',
+  new Route('/import-ban_groups/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportBanGroups'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
+$routes->add('import-ban_items',
+  new Route('/import-ban_items/{page}/{limit}', [
+    '_controller' => 'Habeuk\MigrateSmf1xTo2x\Controller\ImportDatasController::ImportBanItems'
+  ], [
+    'page' => '[0-9]+',
+    'limit' => '[0-9]+'
+  ]));
 
 //
 return $routes;

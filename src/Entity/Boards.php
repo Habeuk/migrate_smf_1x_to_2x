@@ -25,38 +25,38 @@ class Boards {
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $ID_CAT;
+  private $ID_CAT;
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $childLevel;
+  private $childLevel;
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $ID_PARENT;
+  private $ID_PARENT;
   
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $boardOrder;
+  private $boardOrder;
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $ID_LAST_MSG;
+  private $ID_LAST_MSG;
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $ID_MSG_UPDATED;
+  private $ID_MSG_UPDATED;
   /**
    * pas present dans la nouvelle version.
    */
   #[ORM\Column(type: 'integer')]
-  private string $lastUpdated;
+  private $lastUpdated;
   /**
    * memberName
    */
@@ -76,12 +76,12 @@ class Boards {
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $numTopics;
+  private $numTopics;
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $numPosts;
+  private $numPosts;
   /**
    * memberName
    */
@@ -91,17 +91,17 @@ class Boards {
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $ID_THEME;
+  private $ID_THEME;
   /**
    * pas disponible dans la version 2x
    */
   #[ORM\Column(type: 'integer')]
-  private string $permission_mode;
+  private $permission_mode;
   /**
    * memberName
    */
   #[ORM\Column(type: 'integer')]
-  private string $override_theme;
+  private $override_theme;
   
   /**
    *

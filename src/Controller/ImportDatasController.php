@@ -32,6 +32,8 @@ use Habeuk\MigrateSmf1xTo2x\Entity\LogSearchSubjects;
 use Habeuk\MigrateSmf1xTo2x\Entity\LogSearchTopics;
 use Habeuk\MigrateSmf1xTo2x\Entity\Smileys;
 use Habeuk\MigrateSmf1xTo2x\Entity\BoardsPermissionsView;
+use Habeuk\MigrateSmf1xTo2x\Entity\BanGroups;
+use Habeuk\MigrateSmf1xTo2x\Entity\BanItems;
 
 /**
  *
@@ -39,6 +41,20 @@ use Habeuk\MigrateSmf1xTo2x\Entity\BoardsPermissionsView;
  *        
  */
 class ImportDatasController {
+  
+  public function ImportBanItems($page, $limit) {
+    $entity = new BanItems();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des BanItems ");
+  }
+  
+  public function ImportBanGroups($page, $limit) {
+    $entity = new BanGroups();
+    $entity->saveResultInVersion2x($page, $limit);
+    dump($entity->getresults());
+    return new Response(" Importe des BanGroups ");
+  }
   
   public function ImportAttachmentsRenameFile($page, $limit) {
     $entity = new Attachments();
